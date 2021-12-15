@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>App Sushi-Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+
+<body>
+    <h1>Design your own sushi!</h1>
+    <form method="post" th:object="${design}">
+
+        <div class="grid">
+            <div class="ingredient-group" id="sushiType">
+                <h3>Choose sushi type:</h3>
+                <div th:each="type : ${sushiType}">
+                    <input name="sushiType" type="radio" th:value="${type}"/>
+                    <span th:text="${type}">SUSHI TYPE</span><br/>
+                </div>
+            </div>
+
+            <div class="ingredient-group" id="fish">
+                <h3>Choose fish:</h3>
+                <div th:each="ingredient : ${fish}">
+                    <input name="ingredients" type="radio" th:value="${ingredient.id}"/>
+                    <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                </div>
+            </div>
+
+            <div class="ingredient-group" id="veggie">
+                <h3>Choose vegetable:</h3>
+                <div th:each="ingredient : ${veggie}">
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                    <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                </div>
+            </div>
+
+            <div class="ingredient-group" id="additions">
+                <h3>Choose additional ingredient:</h3>
+                <div th:each="ingredient : ${additions}">
+                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                    <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+                </div>
+            </div>
+
+            <h3>Give your sushi a name:</h3>
+            <input type="text" th:field="*{name}"/>
+            <button>Send your order</button>
+        </div>
+    </form>
+</body>
+</html>
