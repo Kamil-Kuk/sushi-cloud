@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS Ingredient (id identity, name VARCHAR(35) NOT NULL, ingredient_type VARCHAR(10) NOT NULL);
-CREATE TABLE IF NOT EXISTS Sushi (id identity, name VARCHAR(50) NOT NULL, createdAr TIMESTAMP NOT NULL);
-CREATE TABLE IF NOT EXISTS Sushi_Ingredient (sushi BIGINT NOT NULL, ingredient VARCHAR(4) NOT NULL);
+CREATE TABLE IF NOT EXISTS Sushi (id identity, name VARCHAR(50) NOT NULL, createdAt TIMESTAMP NOT NULL);
+CREATE TABLE IF NOT EXISTS Sushi_Ingredient (sushi BIGINT NOT NULL, ingredient VARCHAR(14) NOT NULL);
 ALTER TABLE Sushi_Ingredient ADD FOREIGN KEY (sushi) REFERENCES Sushi(id);
 ALTER TABLE Sushi_Ingredient ADD FOREIGN KEY (ingredient) REFERENCES Ingredient(id);
 

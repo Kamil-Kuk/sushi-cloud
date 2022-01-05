@@ -5,14 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import sia.sushicloud.model.Order;
 import sia.sushicloud.model.Sushi;
 import sia.sushicloud.model.Ingredient;
 import sia.sushicloud.model.SushiType;
 import sia.sushicloud.persistence.SushiIngredientRepository;
+import sia.sushicloud.persistence.SushiRepository;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -25,10 +24,22 @@ import java.util.List;
 public class DesignSushiController {
 
     private final SushiIngredientRepository ingredientRepository;
+    private SushiRepository sushiRepository;
 
     @Autowired
-    public DesignSushiController(SushiIngredientRepository ingredientRepository){
+    public DesignSushiController(SushiIngredientRepository ingredientRepository, SushiRepository sushiRepository){
         this.ingredientRepository = ingredientRepository;
+        this.sushiRepository = sushiRepository;
+    }
+
+    @ModelAttribute(name = "order")
+    public Order order() {
+        return new Order();
+    }
+
+    @ModelAttribute(name = "sushi")
+    public Sushi sushi() {
+        return new Sushi();
     }
 
     @GetMapping
@@ -45,11 +56,13 @@ public class DesignSushiController {
     }
 
     @PostMapping
-    public String processDesign(@Valid Sushi sushi, Errors errors){
+    public String processDesign(@Valid Sushi design, Errors errors, @ModelAttribute Order order){
         if(errors.hasErrors()){
             return "design";
         }
-        log.info("processing designed sushi called " + sushi.getName());
+        Sushi saved = sushiRepository.save(design);
+        order.addSushi(saved);
+        log.info("processing designed sushi called " + design.getName());
         return "redirect:/orders/current";
     }
 
