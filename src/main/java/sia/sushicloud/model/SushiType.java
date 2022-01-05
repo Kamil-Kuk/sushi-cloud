@@ -1,4 +1,4 @@
-package sia.sushicloud.assets;
+package sia.sushicloud.model;
 
 public enum SushiType {
     NIGIRI,

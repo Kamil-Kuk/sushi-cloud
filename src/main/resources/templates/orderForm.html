@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>App Sushi-Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+
+<body>
+<form method="POST" th:action="@{/orders}" th:object="${order}">
+    <h1>Order your own sushi</h1>
+
+    <a th:href="@{/design}" id="another">Design another sushi</a>
+    <br/>
+
+    <div th:if="${#fields.hasErrors()}">
+        <span class="validationError">
+            Problem was detected with your order
+        </span>
+    </div>
+
+    <h3>Delivery address:</h3>
+    <label for="name">Name and surname: </label>
+    <input type="text" th:field="*{name}">
+    <span class="validationError"
+          th:if="${#fields.hasErrors('name')}"
+          th:erros="*{name}">Name and surname cannot be blank</span>
+    <br/>
+
+    <label for="street">Street: </label>
+    <input type="text" th:field="*{street}">
+    <span class="validationError"
+          th:if="${#fields.hasErrors('street')}"
+          th:erros="*{street}">Street name cannot be blank</span>
+    <br/>
+
+    <label for="streetNr">Building/appartment number: </label>
+    <input type="text" th:field="*{streetNr}">
+    <span class="validationError"
+          th:if="${#fields.hasErrors('streetNr')}"
+          th:erros="*{streetNr}">Street number cannot be blank</span>
+    <br/>
+
+    <label for="city">City: </label>
+    <input type="text" th:field="*{city}">
+    <span class="validationError"
+          th:if="${#fields.hasErrors('city')}"
+          th:erros="*{city}">City cannot be blank</span>
+    <br/>
+
+    <label for="zip">Zip code: </label>
+    <input type="text" th:field="*{zip}">
+    <span class="validationError"
+          th:if="${#fields.hasErrors('zip')}"
+          th:erros="*{zip}">Zipcode cannot be blank</span>
+    <br/>
+
+    <h3>Payment: </h3>
+<!--    <label for="paymentMethod">Payment method: </label>-->
+<!--    <div th:each="method : ${paymentMethods}">-->
+<!--        <input name="paymentMethod" type="radio" th:value="${method}"/>-->
+<!--        <span th:text="${method}">PAYMENT METHOD</span>-->
+<!--        <span class="validationError"-->
+<!--              th:if="${#fields.hasErrors('paymentMethod')}"-->
+<!--              th:erros="*{paymentMethod}">Select payment method</span>-->
+<!--        <br/>-->
+<!--    </div>-->
+
+    <label for="ccNumber">Credit card number: </label>
+    <input type="text" th:field="*{ccNumber}">
+    <span class="validationError"
+          th:if="${#fields.hasErrors('ccNumber')}"
+          th:erros="*{ccNumber}">Wrong credit card number</span>
+    <br/>
+    <label for="ccExpiration">Expiration date: </label>
+    <input type="text" th:field="*{ccExpiration}">
+    <span class="validationError"
+          th:if="${#fields.hasErrors('ccExpiration')}"
+          th:erros="*{ccExpiration}">Wrong expiration date format. Correct format is MM/RR</span>
+    <br/>
+    <label for="ccCvv">CVV code: </label>
+    <input type="text" th:field="*{ccCvv}">
+    <span class="validationError"
+          th:if="${#fields.hasErrors('ccCvv')}"
+          th:erros="*{ccCvv}">CVV code in invalid</span>
+    <br/>
+
+
+    <input type="submit" value="Issue order"/>
+</form>
+</body>
+</html>
