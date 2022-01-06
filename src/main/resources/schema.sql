@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS Ingredient (id identity, name VARCHAR(35) NOT NULL, ingredient_type VARCHAR(10) NOT NULL);
-CREATE TABLE IF NOT EXISTS Sushi (id identity, name VARCHAR(50) NOT NULL, createdAt TIMESTAMP NOT NULL);
+CREATE TABLE IF NOT EXISTS Sushi (id identity, name VARCHAR(50) NOT NULL, created_at TIMESTAMP NOT NULL);
 CREATE TABLE IF NOT EXISTS Sushi_Ingredient (sushi BIGINT NOT NULL, ingredient VARCHAR(14) NOT NULL);
 ALTER TABLE Sushi_Ingredient ADD FOREIGN KEY (sushi) REFERENCES Sushi(id);
 ALTER TABLE Sushi_Ingredient ADD FOREIGN KEY (ingredient) REFERENCES Ingredient(id);
@@ -23,8 +23,9 @@ ALTER TABLE Sushi_Ingredient ADD FOREIGN KEY (ingredient) REFERENCES Ingredient(
     city VARCHAR(50) NOT NULL,
     zip VARCHAR(10) NOT NULL,
     ccNumber VARCHAR(16) NOT NULL,
-    ccExpiration VARCHAR(3) NOT NULL,
-    ccCvv TIMESTAMP NOT NULL);
+    ccExpiration VARCHAR(5) NOT NULL,
+    ccCvv VARCHAR(3) NOT NULL,
+    placeAt TIMESTAMP NOT NULL);
 
 CREATE TABLE IF NOT EXISTS Sushi_Order_Sushi (sushi_order BIGINT NOT NULL, sushi BIGINT NOT NULL);
 ALTER TABLE Sushi_Order_Sushi ADD FOREIGN KEY (sushi_order) REFERENCES Sushi_Order(id);

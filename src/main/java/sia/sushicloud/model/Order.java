@@ -24,7 +24,7 @@ public class Order {
     @NotBlank(message = "You need to provide zip code")
     private String zip;
 //    private String paymentMethod;
-    private PaymentStatus paymentStatus;
+//    private PaymentStatus paymentStatus;
     @CreditCardNumber(message = "This is not a valid credit card number")
     private String ccNumber;
     @Pattern(regexp = "^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$", message = "Date must be given in format MM/YY")

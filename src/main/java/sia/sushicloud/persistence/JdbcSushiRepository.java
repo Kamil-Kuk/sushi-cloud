@@ -38,7 +38,7 @@ public class JdbcSushiRepository implements SushiRepository {
 
     private Long saveSushiInfo(Sushi sushi) {
         sushi.setCreatedAt(new Date());
-        PreparedStatementCreatorFactory preparedStatementCreatorFactory = new PreparedStatementCreatorFactory("INSERT INTO Sushi (name, createdAt) values (?, ?)", Types.VARCHAR, Types.TIMESTAMP);
+        PreparedStatementCreatorFactory preparedStatementCreatorFactory = new PreparedStatementCreatorFactory("INSERT INTO Sushi (name, created_at) values (?, ?)", Types.VARCHAR, Types.TIMESTAMP);
         preparedStatementCreatorFactory.setReturnGeneratedKeys(true);
         PreparedStatementCreator psc = preparedStatementCreatorFactory.newPreparedStatementCreator(Arrays.asList(sushi.getName(), new Timestamp(sushi.getCreatedAt().getTime())));
         KeyHolder keyHolder = new GeneratedKeyHolder();
