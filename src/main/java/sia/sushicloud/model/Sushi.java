@@ -26,6 +26,7 @@ public class Sushi {
     @Size(min = 1, message = "You need to choose at least one ingredient")
     private List<String> ingredients;
 
+    @Enumerated(EnumType.STRING)
     private SushiType type;
 
     @PrePersist
