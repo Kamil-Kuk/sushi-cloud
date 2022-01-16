@@ -17,7 +17,9 @@ import sia.sushicloud.persistence.SushiRepository;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -69,12 +71,7 @@ public class DesignSushiController {
     }
 
     private List<String> getSushiTypesStringList() {
-        SushiType[] types = SushiType.values();
-        List<String> result = new ArrayList<>();
-        for(SushiType type: types){
-            result.add(type.toString().toLowerCase().replace("_"," "));
-        }
-        return result;
+        return Arrays.stream(SushiType.values()).map(Enum::toString).collect(Collectors.toList());
     }
 
     private List<Ingredient> filterByType(List<Ingredient> ingredients, Ingredient.IngredientType type) {

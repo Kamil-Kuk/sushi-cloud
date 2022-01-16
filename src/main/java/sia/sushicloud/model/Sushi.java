@@ -1,6 +1,7 @@
 package sia.sushicloud.model;
 
 import lombok.*;
+import sia.sushicloud.service.SushiTypeConverter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -33,7 +34,8 @@ public class Sushi {
     @Size(min = 1, message = "You need to choose at least one ingredient")
     private List<Ingredient> ingredient;
 
-    @Enumerated(EnumType.STRING)
+//    @Convert(converter = SushiTypeConverter.class)
+//    @Enumerated(EnumType.STRING)
     private SushiType type;
 
     @PrePersist

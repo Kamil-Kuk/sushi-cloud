@@ -14,8 +14,8 @@
             <div class="ingredient-group" id="sushiType">
                 <h3>Choose sushi type:</h3>
                 <div th:each="type : ${sushiType}">
-                    <input name="sushiType" type="radio" th:value="${type}"/>
-                    <span th:text="${type}">SUSHI TYPE</span><br/>
+                    <input name="type" type="radio" th:value="${type}"/>
+                    <span th:text="${type.toLowerCase()}">SUSHI TYPE</span><br/>
                 </div>
             </div>
 

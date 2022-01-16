@@ -8,7 +8,6 @@ public enum SushiType {
     KABURAMAKI,
     GUNKANY,
     SASHIMI,
-    SASHIMI_ROLL,
     OYAKOMAKI,
     DATE
 }
