@@ -1,6 +1,6 @@
 package sia.sushicloud.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,10 +10,12 @@ import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Sushi {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Date createdAt;
@@ -23,8 +25,13 @@ public class Sushi {
     private String name;
 
     @ManyToMany(targetEntity = Ingredient.class)
+    @JoinTable(
+            name = "SUSHI_INGREDIENT",
+            joinColumns = { @JoinColumn(name = "sushi_id", referencedColumnName = "id", nullable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "ingredient_id", referencedColumnName = "id", nullable = false) }
+    )
     @Size(min = 1, message = "You need to choose at least one ingredient")
-    private List<String> ingredients;
+    private List<Ingredient> ingredient;
 
     @Enumerated(EnumType.STRING)
     private SushiType type;

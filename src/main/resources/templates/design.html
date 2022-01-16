@@ -22,7 +22,7 @@
             <div class="ingredient-group" id="fish">
                 <h3>Choose fish:</h3>
                 <div th:each="ingredient : ${fish}">
-                    <input name="ingredients" type="radio" th:value="${ingredient.id}"/>
+                    <input name="ingredient" type="radio" th:value="${ingredient.id}"/>
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                 </div>
             </div>
@@ -30,7 +30,7 @@
             <div class="ingredient-group" id="veggie">
                 <h3>Choose vegetable:</h3>
                 <div th:each="ingredient : ${veggie}">
-                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                    <input name="ingredient" type="checkbox" th:value="${ingredient.id}"/>
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                 </div>
             </div>
@@ -38,7 +38,7 @@
             <div class="ingredient-group" id="additions">
                 <h3>Choose additional ingredient:</h3>
                 <div th:each="ingredient : ${additions}">
-                    <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                    <input name="ingredient" type="checkbox" th:value="${ingredient.id}"/>
                     <span th:text="${ingredient.name}">INGREDIENT</span><br/>
                 </div>
             </div>

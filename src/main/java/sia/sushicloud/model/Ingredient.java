@@ -1,26 +1,23 @@
 package sia.sushicloud.model;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Data
-@RequiredArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Ingredient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private final Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private final String name;
+    private String name;
 
     @Enumerated(EnumType.STRING)
-    private final IngredientType ingredientType;
+    private IngredientType ingredientType;
 
     public enum IngredientType {
         FISH, VEGGIE, ADDITIONS

@@ -1,6 +1,6 @@
 package sia.sushicloud.model;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import javax.persistence.*;
@@ -12,13 +12,15 @@ import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Sushi_Order")
 public class Order implements Serializable {
 
-    private static final Long serialVersionUID = 1L;
+//    private static final Long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Date placeAt;
@@ -37,8 +39,6 @@ public class Order implements Serializable {
 
     @NotBlank(message = "You need to provide zip code")
     private String zip;
-//    private String paymentMethod;
-//    private PaymentStatus paymentStatus;
 
     @CreditCardNumber(message = "This is not a valid credit card number")
     private String ccNumber;
@@ -50,19 +50,28 @@ public class Order implements Serializable {
     private String ccCvv;
 
     @ManyToMany(targetEntity = Sushi.class)
-    private List<Sushi> sushiList;
+    @JoinTable(
+            name = "SUSHI_ORDER_SUSHI",
+            joinColumns = { @JoinColumn(name = "sushi_order_id", referencedColumnName = "id", nullable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "sushi_id", referencedColumnName = "id", nullable = false) }
+    )
+    private List<Sushi> sushi;
 
     public void addSushi(Sushi sushi){
-        List<Sushi> sushiList = this.getSushiList();
+        List<Sushi> sushiList = this.getSushi();
         if(sushiList == null){
             sushiList = new ArrayList<>();
         }
         sushiList.add(sushi);
-        this.setSushiList(sushiList);
+        this.setSushi(sushiList);
     }
 
     @PrePersist
     void placedAt(){
         this.placeAt = new Date();
     }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

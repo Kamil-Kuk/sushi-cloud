@@ -10,6 +10,8 @@ import sia.sushicloud.model.Order;
 import sia.sushicloud.model.Sushi;
 import sia.sushicloud.model.Ingredient;
 import sia.sushicloud.model.SushiType;
+import sia.sushicloud.persistence.JpaSushiIngredientRepository;
+import sia.sushicloud.persistence.JpaSushiRepository;
 import sia.sushicloud.persistence.SushiIngredientRepository;
 import sia.sushicloud.persistence.SushiRepository;
 
@@ -23,11 +25,11 @@ import java.util.List;
 @SessionAttributes("order")
 public class DesignSushiController {
 
-    private final SushiIngredientRepository ingredientRepository;
-    private SushiRepository sushiRepository;
+    private final JpaSushiIngredientRepository ingredientRepository;
+    private JpaSushiRepository sushiRepository;
 
     @Autowired
-    public DesignSushiController(SushiIngredientRepository ingredientRepository, SushiRepository sushiRepository){
+    public DesignSushiController(JpaSushiIngredientRepository ingredientRepository, JpaSushiRepository sushiRepository){
         this.ingredientRepository = ingredientRepository;
         this.sushiRepository = sushiRepository;
     }

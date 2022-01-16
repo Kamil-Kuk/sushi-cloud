@@ -2,6 +2,8 @@ package sia.sushicloud.contoller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import sia.sushicloud.model.Order;
 import sia.sushicloud.model.PaymentStatus;
+import sia.sushicloud.model.User;
+import sia.sushicloud.persistence.JpaOrderRepository;
 import sia.sushicloud.persistence.OrderRepository;
 
 import javax.validation.Valid;
@@ -22,10 +26,10 @@ import javax.validation.Valid;
 @SessionAttributes("order")
 public class OrderController {
 
-    private OrderRepository orderRepository;
+    private JpaOrderRepository orderRepository;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(JpaOrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 
@@ -41,15 +45,14 @@ public class OrderController {
     }
 
     @PostMapping
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus){
+    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus, @AuthenticationPrincipal User user) {
         if(errors.hasErrors()){
             return "orderForm";
         }
-//        order.setPaymentStatus(PaymentStatus.PENDING);
+        order.setUser(user);
         log.info(order.toString());
         orderRepository.save(order);
         sessionStatus.setComplete();
-//        log.info("New order was issued " + order);
         return "redirect:/";
     }
 }
