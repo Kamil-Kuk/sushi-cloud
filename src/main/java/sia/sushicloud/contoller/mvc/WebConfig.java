@@ -1,4 +1,4 @@
-package sia.sushicloud.contoller;
+package sia.sushicloud.contoller.mvc;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
