@@ -2,7 +2,9 @@ package sia.sushicloud.contoller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import sia.sushicloud.model.Order;
-import sia.sushicloud.model.PaymentStatus;
 import sia.sushicloud.model.User;
 import sia.sushicloud.persistence.JpaOrderRepository;
-import sia.sushicloud.persistence.OrderRepository;
 
 import javax.validation.Valid;
 
@@ -24,8 +24,10 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("order")
+@ConfigurationProperties(prefix = "sushi.order")
 public class OrderController {
 
+    private int pageSize = 20;
     private JpaOrderRepository orderRepository;
 
     @Autowired
@@ -33,15 +35,20 @@ public class OrderController {
         this.orderRepository = orderRepository;
     }
 
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
     @GetMapping("/current")
     public String orderForm(){
-//        model.addAttribute("order",new Order());
-//        List<String> paymentMethods = new ArrayList<>();
-//        for(PaymentMethod paymentMethod: PaymentMethod.values()){
-//            paymentMethods.add(paymentMethod.toString().toLowerCase().replaceAll("_", " "));
-//        }
-//        model.addAttribute("paymentMethods", paymentMethods);
         return "orderForm";
+    }
+
+    @GetMapping
+    public String ordersForUser(@AuthenticationPrincipal User user, Model model){
+        Pageable pageable = (Pageable) PageRequest.of(0, pageSize);
+        model.addAttribute("orders", orderRepository.findAllByUserOrderByPlaceAtDesc(user, pageable));
+        return "orderList";
     }
 
     @PostMapping

@@ -34,8 +34,6 @@ public class Sushi {
     @Size(min = 1, message = "You need to choose at least one ingredient")
     private List<Ingredient> ingredient;
 
-//    @Convert(converter = SushiTypeConverter.class)
-//    @Enumerated(EnumType.STRING)
     private SushiType type;
 
     @PrePersist

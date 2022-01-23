@@ -14,3 +14,5 @@ INSERT INTO INGREDIENT (id, INGREDIENT_TYPE, NAME) VALUES (7, 'VEGGIE', 'radish'
 INSERT INTO INGREDIENT (id, INGREDIENT_TYPE, NAME) VALUES (8, 'ADDITIONS', 'wasabi');
 INSERT INTO INGREDIENT (id, INGREDIENT_TYPE, NAME) VALUES (9, 'ADDITIONS', 'philadelphia cheese');
 INSERT INTO INGREDIENT (id, INGREDIENT_TYPE, NAME) VALUES (10, 'ADDITIONS', 'soy sauce');
+
+INSERT INTO USER (id, username, password, fullname, street, city, state, zip, phone) VALUES (1, 'user', 'e202530ccc6e51a676c266d086eddf17db0132b77da77a52b8d401abaddd5b4ab9f07153432f892d', 'John Smith', 'Main Street 5', 'Sopot', 'pomorskie', '81-815', '48+123456789');
