@@ -1,6 +1,7 @@
 package sia.sushicloud.model;
 
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 
@@ -8,7 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Ingredient {
+public class Ingredient extends RepresentationModel<Ingredient> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

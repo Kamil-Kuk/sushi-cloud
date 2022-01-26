@@ -1,6 +1,7 @@
 package sia.sushicloud.model;
 
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 import sia.sushicloud.service.SushiTypeConverter;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Sushi {
+public class Sushi extends RepresentationModel<Sushi> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

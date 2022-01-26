@@ -3,13 +3,22 @@ package sia.sushicloud.contoller.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.LinkRelation;
 import org.springframework.hateoas.server.EntityLinks;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sia.sushicloud.model.Sushi;
+import sia.sushicloud.model.utils.SushiModel;
+import sia.sushicloud.model.utils.SushiModelAssembler;
 import sia.sushicloud.persistence.JpaSushiRepository;
 
+
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -27,9 +36,16 @@ public class DesignSushiRestController {
     }
 
     @GetMapping("/recent")
-    public Iterable<Sushi> recentSushi(){
+    public CollectionModel<SushiModel> recentSushi(){
         PageRequest page = PageRequest.of(0, 12, Sort.by("createdAt").descending());
-        return sushiRepository.findAll(page).getContent();
+
+        List<Sushi> sushiList = sushiRepository.findAll(page).getContent();
+        CollectionModel<SushiModel> recentModels = new SushiModelAssembler().toCollectionModel(sushiList);
+
+//        CollectionModel<EntityModel<Sushi>> model = CollectionModel.wrap(sushiList);
+//        model.add(Link.of("http://localhost:8080/design/recent", "recents"));
+        recentModels.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(DesignSushiRestController.class).recentSushi()).withRel("recents"));
+        return recentModels;
     }
 
     @GetMapping("/{id}")
