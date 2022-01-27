@@ -1,6 +1,7 @@
 package sia.sushicloud.model;
 
 import lombok.*;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.hateoas.RepresentationModel;
 import sia.sushicloud.service.SushiTypeConverter;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Data
 @Entity
+@RestResource(rel="sushi", path = "sushi")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Sushi extends RepresentationModel<Sushi> {

@@ -3,11 +3,13 @@ package sia.sushicloud.model.utils;
 import lombok.Data;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 import sia.sushicloud.model.Sushi;
 
 import java.util.Date;
 
 @Data
+@Relation(value="sushi", collectionRelation = "sushiList")
 public class SushiModel extends RepresentationModel<Sushi> {
 
     private static final IngredientModelAssembler ingredientAssembler = new IngredientModelAssembler();
