@@ -7,7 +7,7 @@ import sia.sushicloud.model.Sushi;
 
 public class IngredientModelAssembler extends RepresentationModelAssemblerSupport<Ingredient, IngredientModel> {
 
-    public IngredientModelAssembler(Class<?> controllerClass) {
+    public IngredientModelAssembler() {
         super(IngredientRestController.class, IngredientModel.class);
     }
 

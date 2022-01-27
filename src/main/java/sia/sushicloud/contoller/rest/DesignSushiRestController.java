@@ -41,18 +41,16 @@ public class DesignSushiRestController {
 
         List<Sushi> sushiList = sushiRepository.findAll(page).getContent();
         CollectionModel<SushiModel> recentModels = new SushiModelAssembler().toCollectionModel(sushiList);
-
-//        CollectionModel<EntityModel<Sushi>> model = CollectionModel.wrap(sushiList);
-//        model.add(Link.of("http://localhost:8080/design/recent", "recents"));
         recentModels.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(DesignSushiRestController.class).recentSushi()).withRel("recents"));
         return recentModels;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Sushi> getById(@PathVariable("id") Long id){
+    public ResponseEntity<SushiModel> getById(@PathVariable("id") Long id){
         Optional<Sushi> optionalSushi = sushiRepository.findById(id);
         if(optionalSushi.isPresent()) {
-            return new ResponseEntity<>(optionalSushi.get(), HttpStatus.OK);
+            SushiModel sushiModel = new SushiModelAssembler().toModel(optionalSushi.get());
+            return new ResponseEntity<>(sushiModel, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
