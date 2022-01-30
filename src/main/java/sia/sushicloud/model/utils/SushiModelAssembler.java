@@ -1,6 +1,5 @@
 package sia.sushicloud.model.utils;
 
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import sia.sushicloud.contoller.rest.DesignSushiRestController;
 import sia.sushicloud.model.Sushi;

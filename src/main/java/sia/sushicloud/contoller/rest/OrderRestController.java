@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import sia.sushicloud.model.Order;
 import sia.sushicloud.persistence.JpaOrderRepository;
 
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/order", produces = {"application/json", "text/xml"})

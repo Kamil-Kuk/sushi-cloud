@@ -1,22 +1,16 @@
 package sia.sushicloud.contoller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sia.sushicloud.model.Ingredient;
-import sia.sushicloud.model.Sushi;
 import sia.sushicloud.model.utils.IngredientModel;
 import sia.sushicloud.model.utils.IngredientModelAssembler;
-import sia.sushicloud.model.utils.SushiModel;
-import sia.sushicloud.model.utils.SushiModelAssembler;
 import sia.sushicloud.persistence.JpaSushiIngredientRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController

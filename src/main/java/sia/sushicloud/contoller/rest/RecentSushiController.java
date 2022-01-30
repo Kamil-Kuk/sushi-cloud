@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.rest.webmvc.ProfileResourceProcessor;
-import org.springframework.data.rest.webmvc.RepositoryLinksResource;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.*;
 import org.springframework.hateoas.server.EntityLinks;
@@ -14,18 +12,12 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.method.annotation.ModelAttributeMethodProcessor;
-import sia.sushicloud.model.Ingredient;
 import sia.sushicloud.model.Sushi;
-import sia.sushicloud.model.utils.IngredientModel;
-import sia.sushicloud.model.utils.IngredientModelAssembler;
 import sia.sushicloud.model.utils.SushiModel;
 import sia.sushicloud.model.utils.SushiModelAssembler;
-import sia.sushicloud.persistence.JpaSushiIngredientRepository;
 import sia.sushicloud.persistence.JpaSushiRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @RepositoryRestController
 public class RecentSushiController {

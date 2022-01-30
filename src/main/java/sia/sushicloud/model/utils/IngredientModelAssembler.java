@@ -3,7 +3,6 @@ package sia.sushicloud.model.utils;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import sia.sushicloud.contoller.rest.IngredientRestController;
 import sia.sushicloud.model.Ingredient;
-import sia.sushicloud.model.Sushi;
 
 public class IngredientModelAssembler extends RepresentationModelAssemblerSupport<Ingredient, IngredientModel> {
 
